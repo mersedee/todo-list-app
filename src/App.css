@@ -36,7 +36,6 @@ ul {
 .app-container {
     border-radius: 8px;
     max-width: 480px;
-    max-height: 100%;
     background-color: white;
     padding: 24px;
     overflow: auto;
@@ -88,6 +87,11 @@ ul {
 
 .task-input::placeholder {
     color: rgba(0, 0, 0, 0.4);
+}
+
+.task-list {
+    max-height: 200px;
+    overflow-y: scroll;
 }
 
 .task-list-item {
@@ -144,6 +148,7 @@ ul {
     position: relative;
     transition: 0.2s;
     cursor: pointer;
+    word-break: break-word;
 }
 
 .delete-btn {
@@ -156,6 +161,7 @@ ul {
     background-size: 16px;
     background-position: center;
     cursor: pointer;
+    min-width: 16px;
 }
 
 @supports (-webkit-appearance: none) or (-moz-appearance: none) {

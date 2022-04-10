@@ -1,10 +1,15 @@
 import React from 'react';
 import TodoItem from './TodoItem';
+import {useGetTasksQuery} from '../../feature/tasks'
+import {Task} from '../../models/task.model';
 
 const TodoList = () => {
+    const {data, error, isLoading, isSuccess, isError} = useGetTasksQuery(0);
     return (
         <ul className="task-list">
-            <TodoItem/>
+            {!isLoading &&  data.map((task: Task) => (
+                <TodoItem key={task.id} task={task}/>
+            ))}
         </ul>
     );
 };

@@ -1,11 +1,16 @@
 import React from 'react';
+import {Task} from '../../../models/task.model';
 
-const TodoItem = () => {
+type AppProps = {
+    task: Task
+}
+
+const TodoItem = ({task} : AppProps) => {
     return (
         <li className="task-list-item">
             <label className="task-list-item-label">
                 <input type="checkbox"/>
-                <span>name</span>
+                <span>{task.content}</span>
             </label>
             <span className="delete-btn" title="Delete Task"/>
         </li>
