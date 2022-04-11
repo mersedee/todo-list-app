@@ -7,7 +7,7 @@ const TodoList = () => {
     const {data, error, isLoading, isSuccess, isError} = useGetTasksQuery(0);
     return (
         <ul className="task-list">
-            {!isLoading &&  data.map((task: Task) => (
+            {!isLoading && [...data].reverse().map((task: Task) => (
                 <TodoItem key={task.id} task={task}/>
             ))}
         </ul>
