@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {tasksApi, useAddTaskMutation} from '../../feature/task';
+import {useAddTaskMutation} from '../../feature/task';
 
 const AddInput = () => {
     const [task, setTask] = useState('');

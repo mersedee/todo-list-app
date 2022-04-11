@@ -31,6 +31,14 @@ const Home = () => {
 
         // const result = dispatch(tasksApi.endpoints.addTask.initiate(body));
         // console.warn('result', result);
+
+        // api.updateTask(5745324443, { content: 'edit1 Coffee', completed: true })
+        //     .then((isSuccess) => console.log(isSuccess))
+        //     .catch((error) => console.log(error))
+
+        api.closeTask(2995104339)
+            .then((isSuccess) => console.log(isSuccess))
+            .catch((error) => console.log(error))
     }
 
     return (
