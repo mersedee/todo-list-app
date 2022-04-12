@@ -21,6 +21,11 @@ export const tasksApi = createApi({
             providesTags: ['Task'],
         }),
 
+        getCompletedTasks: builder.query({
+            query: () => 'https://api.todoist.com/sync/v8/completed/get_all',
+            providesTags: ['Task'],
+        }),
+
         addTask: builder.mutation<Task, Partial<Task>>({
             query: (task) => ({
                 url: `tasks`,

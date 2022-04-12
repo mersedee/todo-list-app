@@ -91,6 +91,7 @@ ul {
 
 .task-list {
     max-height: 200px;
+    min-height: 200px;
     overflow-y: scroll;
 }
 
@@ -162,6 +163,28 @@ ul {
     background-position: center;
     cursor: pointer;
     min-width: 16px;
+}
+
+.react-tabs__tab {
+    bottom: 0;
+    border: none;
+}
+
+.react-tabs__tab-list {
+    border-bottom: none !important;
+}
+
+.react-tabs__tab-list > li {
+    font-size: 15px;
+}
+
+.react-tabs__tab--selected,
+.react-tabs__tab--selected:focus  {
+    border-bottom: 1px solid var(--checkbox-color) !important;
+}
+
+.react-tabs__tab:focus:after {
+    background: transparent;
 }
 
 @supports (-webkit-appearance: none) or (-moz-appearance: none) {
