@@ -1,7 +1,7 @@
 import React from 'react';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import TodoItem from './TodoItem';
-import {useGetTasksQuery, useGetCompletedTasksQuery} from '../../feature/task'
+import {useGetTasksQuery, useGetCompletedTasksQuery} from '../../services/task'
 import {Task} from '../../models/task.model';
 import Loading from '../../components/Loading';
 

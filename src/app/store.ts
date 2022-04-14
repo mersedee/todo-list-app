@@ -1,6 +1,6 @@
 import {configureStore} from "@reduxjs/toolkit";
 
-import {tasksApi} from "../feature/task";
+import {tasksApi} from "../services/task";
 
 
 export const store = configureStore({

@@ -2,7 +2,7 @@ import React from 'react';
 import {TodoistApi} from '@doist/todoist-api-typescript';
 import AddInput from '../../components/AddInput';
 import TodoList from '../../components/TodoList';
-import {tasksApi} from '../../feature/task';
+import {tasksApi} from '../../services/task';
 
 const Home = () => {
     return (

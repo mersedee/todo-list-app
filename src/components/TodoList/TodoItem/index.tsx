@@ -6,7 +6,7 @@ import {
     useCloseTaskMutation,
     useReopenTaskMutation,
     useUpdateTaskMutation
-} from '../../../feature/task';
+} from '../../../services/task';
 
 type AppProps = {
     task: Task
