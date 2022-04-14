@@ -1,13 +1,10 @@
 import React from 'react';
-import {TodoistApi} from '@doist/todoist-api-typescript'
-import { useDispatch } from 'react-redux'
+import {TodoistApi} from '@doist/todoist-api-typescript';
 import AddInput from '../../components/AddInput';
 import TodoList from '../../components/TodoList';
 import {tasksApi} from '../../feature/task';
 
 const Home = () => {
-    const dispatch = useDispatch()
-
     return (
         <div>
             <div className="app-container" id="taskList">

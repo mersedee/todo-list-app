@@ -21,6 +21,10 @@ export const tasksApi = createApi({
             providesTags: ['Task'],
         }),
 
+        getTask: builder.query({
+            query: (id) => `tasks/${id}`,
+        }),
+
         getCompletedTasks: builder.query({
             query: () => 'https://api.todoist.com/sync/v8/completed/get_all',
             providesTags: ['CompletedTask'],
@@ -34,6 +38,18 @@ export const tasksApi = createApi({
                     'content-type': 'application/json',
                 },
                 body: task
+            }),
+            invalidatesTags: ['Task'],
+        }),
+
+        updateTask: builder.mutation<Task, Partial<Task>>({
+            query: ({id, ...rest}) => ({
+                url: `tasks/${id}`,
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                },
+                body: rest
             }),
             invalidatesTags: ['Task'],
         }),
@@ -66,7 +82,9 @@ export const tasksApi = createApi({
 
 export const {
     useGetTasksQuery,
+    useGetTaskQuery,
     useAddTaskMutation,
+    useUpdateTaskMutation,
     useCloseTaskMutation,
     useReopenTaskMutation,
     useDeleteTaskMutation,

@@ -104,7 +104,7 @@ ul {
     border: 1px solid #ededed;
 }
 
-.task-list-item input {
+.task-list-item input.checkbox {
     width: 16px;
     height: 16px;
     border-radius: 50%;
@@ -122,7 +122,7 @@ ul {
     appearance: none;
 }
 
-.task-list-item input:hover {
+.task-list-item input.checkbox:hover {
     border-color: var(--checkbox-color);
     box-shadow: 0 0 0 3px var(--checkbox-shadow);
 }
@@ -153,7 +153,6 @@ ul {
 }
 
 .delete-btn {
-    margin-left: auto;
     display: block;
     width: 16px;
     height: 16px;
@@ -163,6 +162,51 @@ ul {
     background-position: center;
     cursor: pointer;
     min-width: 16px;
+    margin-left: 6px;
+}
+
+.edit-btn {
+    cursor: pointer;
+    margin-left: auto;
+    color: var(--checkbox-color);
+}
+
+.rodal-dialog {
+    width: 380px !important;
+    height: 200px !important;
+}
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin-top: 40px;
+}
+
+.modal button {
+    position: absolute;
+    right: 15px;
+    left: 15px;
+    bottom: 20px;
+    width: calc(100% - 30px);
+    height: 36px;
+    border-radius: 4px;
+    color: white;
+    background: var(--checkbox-color);
+    border: 1px solid var(--checkbox-color);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.modal input, .modal input:focus {
+    outline: none;
+    border: 1px solid #ededed;
+    border-radius: 4px;
+    height: 36px;
+    width: 100%;
+    margin-top: 4px;
+    padding: 0 5px;
 }
 
 .react-tabs__tab {
@@ -179,7 +223,7 @@ ul {
 }
 
 .react-tabs__tab--selected,
-.react-tabs__tab--selected:focus  {
+.react-tabs__tab--selected:focus {
     border-bottom: 1px solid var(--checkbox-color) !important;
 }
 
