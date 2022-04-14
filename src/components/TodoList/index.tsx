@@ -1,8 +1,9 @@
 import React from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import TodoItem from './TodoItem';
 import {useGetTasksQuery, useGetCompletedTasksQuery} from '../../feature/task'
 import {Task} from '../../models/task.model';
+import Loading from '../../components/Loading';
 
 const TodoList = () => {
     const {data: allTask, isLoading: isAllTaskLoading,} = useGetTasksQuery(0);
@@ -17,14 +18,17 @@ const TodoList = () => {
                 </TabList>
 
                 <TabPanel>
-                    {!isAllTaskLoading && [...allTask].reverse().map((task: Task) => (
-                        <TodoItem key={task.id} task={task}/>
-                    ))}
+                    {isAllTaskLoading ? <Loading/> :
+                        [...allTask].reverse().map((task: Task) => (
+                            <TodoItem key={task.id} task={task}/>
+                        ))}
                 </TabPanel>
+
                 <TabPanel>
-                    {!isCompletedTaskLoading && [...completedTask.items].reverse().map((task: Task) => (
-                        <TodoItem key={task.id} task={task}/>
-                    ))}
+                    {isCompletedTaskLoading ? <Loading/> :
+                        [...completedTask.items].reverse().map((task: Task) => (
+                            <TodoItem key={task.id} task={task}/>
+                        ))}
                 </TabPanel>
             </Tabs>
         </ul>
