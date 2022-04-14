@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Task} from '../../../models/task.model';
-import {useDeleteTaskMutation, useUpdateTaskMutation} from '../../../feature/task';
+import {useDeleteTaskMutation, useCloseTaskMutation, useReopenTaskMutation} from '../../../feature/task';
 
 
 type AppProps = {
@@ -9,26 +9,37 @@ type AppProps = {
 
 const TodoItem = ({task}: AppProps) => {
     const [DeleteTask] = useDeleteTaskMutation();
-    const [UpdateTask] = useUpdateTaskMutation();
-    const [checked, setChecked] = useState(task.completed);
+    const [UpdateTask] = useCloseTaskMutation();
+    const [ReopenTask] = useReopenTaskMutation();
+    const [checked, setChecked] = useState(task.completed || (task.completed_date ? true : false));
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onCloseTask = (e: React.ChangeEvent<HTMLInputElement>) => {
         setChecked(e.target.checked);
         UpdateTask(task.id);
     }
 
     return (
-        <li className="task-list-item">
-            <label className="task-list-item-label">
-                <input type="checkbox" defaultChecked={checked} onChange={onChange}/>
-                <span>{task.content}</span>
-            </label>
-            <span
-                className="delete-btn"
-                title="Delete Task"
-                onClick={() => DeleteTask(task.id)}
-            />
-        </li>
+        <>
+            {task.completed_date ?
+                <li className="task-list-item" aria-disabled="true">
+                    <label className="task-list-item-label">
+                        <input type="checkbox" disabled defaultChecked={checked}/>
+                        <span>{task.content}</span>
+                    </label>
+                </li> :
+                <li className="task-list-item">
+                    <label className="task-list-item-label">
+                        <input type="checkbox" defaultChecked={checked} onChange={onCloseTask}/>
+                        <span>{task.content}</span>
+                    </label>
+                    <span
+                        className="delete-btn"
+                        title="Delete Task"
+                        onClick={() => DeleteTask(task.id)}
+                    />
+                </li>
+            }
+        </>
     );
 };
 

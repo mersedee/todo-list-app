@@ -8,12 +8,12 @@ export const tasksApi = createApi({
     reducerPath: 'tasks',
     baseQuery: fetchBaseQuery({
         baseUrl: "https://api.todoist.com/rest/v1",
-        prepareHeaders: (headers, { getState }) => {
+        prepareHeaders: (headers, {getState}) => {
             headers.set('authorization', `Bearer ${token}`);
             return headers
         },
     }),
-    tagTypes: ['Task'],
+    tagTypes: ['Task', 'CompletedTask'],
 
     endpoints: (builder) => ({
         getTasks: builder.query({
@@ -23,7 +23,7 @@ export const tasksApi = createApi({
 
         getCompletedTasks: builder.query({
             query: () => 'https://api.todoist.com/sync/v8/completed/get_all',
-            providesTags: ['Task'],
+            providesTags: ['CompletedTask'],
         }),
 
         addTask: builder.mutation<Task, Partial<Task>>({
@@ -38,12 +38,20 @@ export const tasksApi = createApi({
             invalidatesTags: ['Task'],
         }),
 
-        updateTask: builder.mutation<void, number>({
+        closeTask: builder.mutation<void, number>({
             query: (id) => ({
                 url: `tasks/${id}/close`,
                 method: 'POST',
             }),
             invalidatesTags: ['Task'],
+        }),
+
+        reopenTask: builder.mutation<void, number>({
+            query: (id) => ({
+                url: `tasks/${id}/reopen`,
+                method: 'POST',
+            }),
+            invalidatesTags: ['CompletedTask'],
         }),
 
         deleteTask: builder.mutation<void, number>({
@@ -56,4 +64,11 @@ export const tasksApi = createApi({
     }),
 })
 
-export const { useGetTasksQuery, useAddTaskMutation, useUpdateTaskMutation, useDeleteTaskMutation } = tasksApi;
+export const {
+    useGetTasksQuery,
+    useAddTaskMutation,
+    useCloseTaskMutation,
+    useReopenTaskMutation,
+    useDeleteTaskMutation,
+    useGetCompletedTasksQuery,
+} = tasksApi;

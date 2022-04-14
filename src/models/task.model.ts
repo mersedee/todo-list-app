@@ -12,4 +12,5 @@ export interface Task {
     created: string
     completed: boolean
     assigner: number
+    completed_date?: string
 }
