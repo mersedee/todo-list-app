@@ -3,7 +3,7 @@ import {useAddTaskMutation} from '../../services/task';
 
 const AddInput = () => {
     const [task, setTask] = useState('');
-    const [AddTask, {isLoading}] = useAddTaskMutation();
+    const [AddTask, {isLoading, isSuccess}] = useAddTaskMutation();
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTask(e.currentTarget.value)
@@ -15,7 +15,7 @@ const AddInput = () => {
         return Math.floor(Math.random() * (max - min) + min);
     }
 
-    const onAddTask = () => {
+    const onAddTask = async () => {
         const body = {
             content: task,
             dueString: 'tomorrow at 12:00',
@@ -23,7 +23,11 @@ const AddInput = () => {
             priority: getRandomInt(1, 20)
         }
 
-        AddTask(body)
+        AddTask(body).then(() => {
+            setTask('');
+        }).catch((e) => {
+            console.log(e)
+        });
     }
 
     return (
@@ -32,12 +36,13 @@ const AddInput = () => {
                 type="text"
                 placeholder="Add New Task"
                 className="task-input"
+                value={task}
                 onChange={onChange}
             />
 
-            <input
-                type="submit"
-                value=""
+            <button
+                type="button"
+                name="submit"
                 className="submit-task"
                 onClick={onAddTask}
             />
