@@ -18,16 +18,21 @@ const TodoList = () => {
                 </TabList>
 
                 <TabPanel>
-                    {isAllTaskLoading ? <Loading/> :
-                        [...allTask].reverse().map((task: Task) => (
-                            <TodoItem key={task.id} task={task}/>
-                        ))}
+                    {isAllTaskLoading ? <div data-testid="loading-1"><Loading/></div> :
+                        [...allTask].reverse().map((task: Task, index: number) => (
+                            <div key={task.id} data-testid={`todo-item-${index}`}>
+                                <TodoItem task={task}/>
+                            </div>
+                        ))
+                    }
                 </TabPanel>
 
                 <TabPanel>
-                    {isCompletedTaskLoading ? <Loading/> :
-                        [...completedTask.items].reverse().map((task: Task) => (
-                            <TodoItem key={task.id} task={task}/>
+                    {isCompletedTaskLoading ? <div data-testid="loading-2"><Loading/></div> :
+                        [...completedTask.items].reverse().map((task: Task, index: number) => (
+                            <div key={task.id} data-testid={`completed-item-${index}`}>
+                                <TodoItem key={task.id} task={task}/>
+                            </div>
                         ))}
                 </TabPanel>
             </Tabs>
