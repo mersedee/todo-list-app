@@ -35,8 +35,9 @@ const TodoItem = ({task}: AppProps) => {
 
     const onUpdate = () => {
         if (editedtask) {
-            UpdateTask({id: task.id, content: editedtask})
-            onHide();
+            UpdateTask({id: task.id, content: editedtask}).then(() => {
+                onHide();
+            })
         }
     }
 
@@ -50,19 +51,27 @@ const TodoItem = ({task}: AppProps) => {
                     </label>
                 </li> :
                 <li className="task-list-item">
-                    <label className="task-list-item-label">
-                        <input type="checkbox" className="checkbox" defaultChecked={checked} onChange={onCloseTask}/>
+                    <label className="task-list-item-label" data-testid="task-label">
+                        <input
+                            type="checkbox"
+                            className="checkbox"
+                            defaultChecked={checked}
+                            onChange={onCloseTask}
+                            data-testid="checkbox"
+                        />
                         <span>{task.content}</span>
                     </label>
 
-                    <div onClick={onShow} className="edit-btn fa fa-pencil"></div>
-                    <Rodal visible={showModal} onClose={onHide}>
-                        <h4 style={{margin: '0'}}>Edit Task</h4>
-                        <div className="modal">
-                            <input type="text" defaultValue={task.content} onChange={onChange}/>
-                            <button type="button" onClick={onUpdate}>Submit</button>
-                        </div>
-                    </Rodal>
+                    <div onClick={onShow} className="edit-btn fa fa-pencil" data-testid="modal-trigger"/>
+                    {showModal ?
+                        <Rodal visible={showModal} onClose={onHide} data-testid="test">
+                            <h4 style={{margin: '0'}}>Edit Task</h4>
+                            <div className="modal">
+                                <input type="text" defaultValue={task.content} onChange={onChange}/>
+                                <button type="button" onClick={onUpdate}>Submit</button>
+                            </div>
+                        </Rodal>
+                        : null}
 
                     <span
                         className="delete-btn"

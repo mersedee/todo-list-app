@@ -19,6 +19,22 @@ const handlers = [
             }]
         }))
     }),
+
+    rest.post(`${rest_url}/tasks`, (req, res, ctx) => {
+        return res(ctx.json([{
+            id: 2995104339,
+            content: 'Buy Milk'
+        }]))
+    }),
+
+    rest.post(`${rest_url}/tasks/${2995104339}`, (req, res, ctx) => {
+        return res(ctx.json({
+            items: [{
+                id: 2995104339,
+                content: 'Buy Milk'
+            }]
+        }))
+    })
 ]
 
 export default handlers;

@@ -38,7 +38,7 @@ describe('TodoList', () => {
         const tab2 = screen.getByText(/Completed/i)
         fireEvent.click(tab2);
 
-        const loading = screen.getByTestId('loading-2')
+        const loading = await waitFor(() => screen.getByTestId('loading-2'))
         expect(loading).toBeInTheDocument()
 
         const todoListItem = await screen.findByTestId(`completed-item-0`)
