@@ -34,6 +34,15 @@ const handlers = [
                 content: 'Buy Milk'
             }]
         }))
+    }),
+
+    rest.delete(`${rest_url}/tasks/${2995104339}`, (req, res, ctx) => {
+        return res(ctx.json({
+            items: [{
+                id: 2995104339,
+                content: 'Buy Milk'
+            }]
+        }))
     })
 ]
 

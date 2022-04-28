@@ -33,12 +33,31 @@ describe('TodoItem', () => {
         expect(title).toBeInTheDocument()
     })
 
-    it("should edit task", async () => {
+    it("should close modal on submit", () => {
         const element = screen.getByTestId("modal-trigger")
         fireEvent.click(element)
         const button = screen.getByRole('button', {name: 'Submit'})
         fireEvent.click(button)
         const title = screen.queryByText("Edit Task")
-        await waitFor(() => expect(title).toBeNull())
+        waitFor(() => expect(title).toBeNull())
+    })
+
+    it("should edit task", () => {
+        const element = screen.getByTestId("modal-trigger")
+        fireEvent.click(element)
+        const inputElement = screen.getByPlaceholderText(/Edit task/i);
+        fireEvent.change(inputElement, {target: {value: 'buy tea'}});
+        const button = screen.getByRole('button', {name: 'Submit'})
+        fireEvent.click(button)
+        const task = screen.getByTestId("task-content")
+        waitFor(() => expect(task).toHaveTextContent('buy tea'))
+    })
+
+    it("should delete task", () => {
+        const task = screen.getByTestId("task-content")
+        expect(task).toHaveTextContent('sample')
+        const deleteTrigger = screen.getByTestId("delete-trigger")
+        fireEvent.click(deleteTrigger)
+        waitFor(() => expect(task).not.toHaveTextContent('sample'))
     })
 })

@@ -59,7 +59,7 @@ const TodoItem = ({task}: AppProps) => {
                             onChange={onCloseTask}
                             data-testid="checkbox"
                         />
-                        <span>{task.content}</span>
+                        <span data-testid="task-content">{task.content}</span>
                     </label>
 
                     <div onClick={onShow} className="edit-btn fa fa-pencil" data-testid="modal-trigger"/>
@@ -67,7 +67,7 @@ const TodoItem = ({task}: AppProps) => {
                         <Rodal visible={showModal} onClose={onHide} data-testid="test">
                             <h4 style={{margin: '0'}}>Edit Task</h4>
                             <div className="modal">
-                                <input type="text" defaultValue={task.content} onChange={onChange}/>
+                                <input type="text" placeholder="Edit task" defaultValue={task.content} onChange={onChange}/>
                                 <button type="button" onClick={onUpdate}>Submit</button>
                             </div>
                         </Rodal>
@@ -76,6 +76,7 @@ const TodoItem = ({task}: AppProps) => {
                     <span
                         className="delete-btn"
                         title="Delete Task"
+                        data-testid="delete-trigger"
                         onClick={() => DeleteTask(task.id)}
                     />
                 </li>
